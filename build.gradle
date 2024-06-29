@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.printf'
+version = '1.0-SNAPSHOT'
+
+apply plugin: 'application'
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.printf.Main'
+        )
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'org.printf.Main'
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
