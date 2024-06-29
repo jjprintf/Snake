@@ -1,6 +1,10 @@
 ![](icon.ico)
 # Snake Game [![Discord](https://img.shields.io/badge/chat-on%20discord-blue.svg)](https://discord.gg/a5TbcCeuJY)
 
+### Requirements
+- **Java 21 or higher**
+- **JRE** (You need to specify the Java bin folder in the environment variables, so you can run the executable, or use grandle, etc.)
+
 This is a 2d game made from scratch in java with native tools.
 It is made as a form of practice to create games natively, without any game engine.
 
