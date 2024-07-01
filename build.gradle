@@ -3,9 +3,10 @@ plugins {
 }
 
 group = 'org.printf'
-version = '1.0-SNAPSHOT'
+version = '1.2'
 
 apply plugin: 'application'
+apply plugin: 'java'
 
 jar {
     manifest {
@@ -15,17 +16,12 @@ jar {
     }
 }
 
+mainClassName = "org.printf.Main"
+
 repositories {
     mavenCentral()
 }
 
-mainClassName = 'org.printf.Main'
-
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
 
-test {
-    useJUnitPlatform()
 }

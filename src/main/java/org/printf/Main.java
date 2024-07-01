@@ -1,6 +1,6 @@
 package org.printf;
 
-import org.printf.api.Window;
+import org.printf.core.Window;
 
 public class Main {
     public static void main(String[] args) {

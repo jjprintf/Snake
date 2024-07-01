@@ -1,42 +1,42 @@
-package org.printf.api;
+package org.printf.core;
 
 import org.printf.game.Game;
 import org.printf.game.Menu;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Window extends JFrame {
-    Menu menu = new Menu(this);
+    Menu menuGame = new Menu(this);
     Game game = new Game(this);
 
     public Window() {
-        this.add(menu);
+        this.add(menuGame);
 
+        // Window Configuration
         this.setTitle("Snake Game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 600);
+        this.setSize(new Dimension(800, 600));
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setBackground(Color.BLACK);
+
         this.setVisible(true);
 
         this.add(game);
     }
 
     public void switchGame() {
-        menu.setVisible(false);
+        menuGame.setVisible(false);
         game.setVisible(true);
         game.requestFocus();
-        game.start();
+        game.init();
     }
 
     public void switchMenu() {
         game.stop();
         game.setVisible(false);
-        menu.setVisible(true);
-        menu.requestFocus();
+        menuGame.setVisible(true);
+        menuGame.requestFocus();
     }
 }

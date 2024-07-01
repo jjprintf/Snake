@@ -1,6 +1,6 @@
 package org.printf.game;
 
-import org.printf.api.Window;
+import org.printf.core.Window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,18 +10,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Menu extends JPanel {
-    private Game game;
-    Window _window;
+    static Window _window;
 
-    public Menu(JFrame frame) {
-        _window = (Window) frame;
+    public Menu(Window frame) {
+        _window = frame;
         this.setBackground(Color.BLACK);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.setFocusable(true);
         this.requestFocus();
 
-        // Agregar espacio flexible en la parte superior para centrar
+        render();
+    }
+
+    private void render() {
         this.add(Box.createVerticalGlue());
 
         JLabel title = new JLabel("Snake Game");
@@ -30,34 +32,25 @@ public class Menu extends JPanel {
         title.setFont(new Font("Arial", Font.BOLD, 36));
         this.add(title);
 
-        // Agregar espacio entre el titulo y los botones
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        JButton startButton = createButton("Start Game", new StartGameListener());
+        JButton startButton = createButton("Start Game", new StartButtonListener());
         this.add(startButton);
 
-        // Agregar espacio entre los botones
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        JButton exitButton = createButton("Exit", new ExitGameListener());
+        JButton exitButton = createButton("Exit", new ExitButtonListener());
         this.add(exitButton);
 
-        // Agregar espacio flexible en la parte inferior
+        this.add(Box.createRigidArea(new Dimension(0, 100)));
+
+        JLabel credits = new JLabel("by jjprintf");
+        credits.setForeground(Color.WHITE);
+        credits.setAlignmentX(CENTER_ALIGNMENT);
+        credits.setFont(new Font("Arial", Font.BOLD, 16));
+        this.add(credits);
+
         this.add(Box.createVerticalGlue());
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        // Dibujar graficos adicionales
-        g.setColor(Color.WHITE);
-        g.drawString("Welcome to Snake Game!", 10, 20);
-
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 35));
-        FontMetrics metrics = getFontMetrics(g.getFont());
-        g.drawString("by jjprintf", (800 - metrics.stringWidth("by jjprintf")) / 2, (600 + 350) / 2);
     }
 
     private JButton createButton(String text, ActionListener listener) {
@@ -90,7 +83,12 @@ public class Menu extends JPanel {
         return button;
     }
 
-    private class StartGameListener implements ActionListener {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
+
+    private static class StartButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Logica para iniciar el juego
@@ -98,7 +96,7 @@ public class Menu extends JPanel {
         }
     }
 
-    private class ExitGameListener implements ActionListener {
+    private static class ExitButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
